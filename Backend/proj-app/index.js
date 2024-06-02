@@ -17,7 +17,7 @@ app.post('/user', async (req, res) => {
         "city": req.body.city,
         "message": req.body.message
     }).then(() => {
-        res.send("operation successfull")
+        res.send("Your information is send to the admin successfully")
     }).catch((err) => {
         console.log(err)
     })

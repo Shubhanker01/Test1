@@ -9,29 +9,32 @@ export default function Card(props) {
         setModal(true)
     }
     const sendData = async () => {
-        let headersList = {
-            "Accept": "*/*",
-            "Content-Type": "application/json"
+        if (name == "" || email == "" || city == "" || message == "") {
+            alert("Please fill out the information")
         }
+        else {
+            let headersList = {
+                "Accept": "*/*",
+                "Content-Type": "application/json"
+            }
 
-        let bodyContent = JSON.stringify({
-            "name": "Shub",
-            "email": "shub@gmail.com",
-            "city": "shimla",
-            "message": "hey"
-        });
+            let bodyContent = JSON.stringify({
+                "name": name,
+                "email": email,
+                "city": city,
+                "message": message
+            });
 
-        let response = await fetch("http://localhost:3000/user", {
-            method: "POST",
-            body: bodyContent,
-            headers: headersList
-        });
+            let response = await fetch("http://localhost:3000/user", {
+                method: "POST",
+                body: bodyContent,
+                headers: headersList
+            });
+            let data = await response.text();
+            setModal(false)
+            alert(data)
 
-        let data = await response.json();
-        console.log(data);
-
-
-        setModal(false)
+        }
         setName("")
         setEmail("")
         setCity("")
@@ -68,22 +71,22 @@ export default function Card(props) {
                                     <div className="mt-[5px]">
                                         <label for="Name" id="name" className="ml-[-452px]">Name</label>
                                         <br />
-                                        <input type="text" placeholder="Enter your name" className="bg-zinc-200 h-[40px] w-[500px] rounded-lg" value={name} onChange={e => setName(e.target.value)}></input>
+                                        <input type="text" placeholder="Enter your name" className="bg-zinc-200 h-[40px] w-[500px] rounded-lg" value={name} onChange={e => setName(e.target.value)} required></input>
                                     </div>
                                     <div className="mt-[5px]">
                                         <label for="email" id="email" className="ml-[-452px]">Email</label>
                                         <br />
-                                        <input type="email" placeholder="Enter your email" className="bg-zinc-200 h-[40px] w-[500px] rounded-lg" value={email} onChange={e => setEmail(e.target.value)}></input>
+                                        <input type="email" placeholder="Enter your email" className="bg-zinc-200 h-[40px] w-[500px] rounded-lg" value={email} onChange={e => setEmail(e.target.value)} required></input>
                                     </div>
                                     <div className="mt-[5px]">
                                         <label for="email" id="city" className="ml-[-452px]">City</label>
                                         <br />
-                                        <input type="text" placeholder="Enter your place" className="bg-zinc-200 h-[40px] w-[500px] rounded-lg" value={city} onChange={e => setCity(e.target.value)}></input>
+                                        <input type="text" placeholder="Enter your place" className="bg-zinc-200 h-[40px] w-[500px] rounded-lg" value={city} onChange={e => setCity(e.target.value)} required></input>
                                     </div>
                                     <div className="mt-[5px]">
                                         <label for="message" id="message" className="ml-[-440px]">Message</label>
                                         <br />
-                                        <textarea name="message" id="message" placeholder="Enter your message" rows="5" cols="30" className="bg-zinc-200 w-[500px] rounded-lg" value={message} onChange={e => setMessage(e.target.value)}></textarea>
+                                        <textarea name="message" id="message" placeholder="Enter your message" rows="5" cols="30" className="bg-zinc-200 w-[500px] rounded-lg" value={message} onChange={e => setMessage(e.target.value)} required></textarea>
                                     </div>
 
                                 </form>
