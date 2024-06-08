@@ -23,6 +23,8 @@ app.post('/user', async (req, res) => {
     })
 
 })
+
+// connecting to mongoose 
 async function main() {
     await mongoose.connect('mongodb+srv://shubhanker40:bca02092001@cluster1.ivvgywy.mongodb.net/Admins')
 }

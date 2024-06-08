@@ -1,4 +1,5 @@
 import { useState } from "react"
+
 export default function Card(props) {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
@@ -8,7 +9,10 @@ export default function Card(props) {
     const openModal = () => {
         setModal(true)
     }
+
+    // function to send data to the database
     const sendData = async () => {
+        // validation of information to check if any of the fields is empty
         if (name == "" || email == "" || city == "" || message == "") {
             alert("Please fill out the information")
         }
@@ -17,7 +21,7 @@ export default function Card(props) {
                 "Accept": "*/*",
                 "Content-Type": "application/json"
             }
-
+            // converts javascript object into JSON object
             let bodyContent = JSON.stringify({
                 "name": name,
                 "email": email,
